@@ -8,18 +8,18 @@ from django.conf import settings
 def send_message(request):
     myinfo = Info.objects.first()
     context = {'myinfo':myinfo}
-    if request.method == 'POST':
-        subject = request.POST['subject']
-        email = request.POST['email']
-        message = request.POST['message']
+   # if request.method == 'POST':
+    #    subject = request.POST['subject']
+    #    email = request.POST['email']
+     #   message = request.POST['message']
         
       
         
-        send_mail(
-            subject,
-            message, 
-            settings.EMAIL_HOST_USER,
-            [email],
-            )
+     #   send_mail(
+      #      subject,
+       #     message, 
+        #    settings.EMAIL_HOST_USER,
+         #   [email],
+         #   )
 
-        return render(request,'contact/contact.html',context)
+    return render(request,'contact/contact.html',context)

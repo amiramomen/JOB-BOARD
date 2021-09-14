@@ -23,7 +23,6 @@ def signup(request):
 
     else:
         form = SignUpForm()
-      
         return render(request, 'registration/signup.html', {'form':form})
 
 
@@ -34,22 +33,22 @@ def profile (request):
 
 def profile_edit (request):
     profile = Profile.objects.get(user = request.user)
-
     if request.method == 'POST':
-     userform = Userform(request.POST,instance = request.user)
-     profileform = Profileform(request.POST,request.FILES,instance = profile)
+        userform = Userform(request.POST,instance=request.user)
+        profileform = Profileform(request.POST , request.FILES, instance= profile)
+        if userform.is_valid() and profileform.is_valid():
+            userform.save()
+            profileform.save()
+          #  myform = profileform.save(commit=False)
+           # myform.user = request.user
+          #  myform.save()
+            return redirect(reverse('accounts:profile'))
 
-     if userform.is_valid() and profileform.is_valid():
-          userform.save()
-          myprofile=profileform.save(commit=False)
-          myprofile.user=request.user
-          myprofile.save()
-          return redirect(reverse('accounts:profile'))
-        
 
+
+    else : 
+        userform = Userform(instance=request.user)
+        profileform = Profileform(instance= profile)
+
+        return render(request,'accounts/profile_edit.html',{'userform':userform,'profileform':profileform})
     
-
-    else :
-       userform = Userform(instance=request.user)
-       profileform = Profileform(instance=profile)
-       return render(request, 'accounts/profile_edit.html',{'userform':userform, 'profileform':profileform})

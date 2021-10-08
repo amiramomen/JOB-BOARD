@@ -21,7 +21,7 @@ def job_list (request):
  context={'jobs': page_obj,'Njob':njob , 'filter':myfilter} 
  return render(request,'job/job_list.html',context)
 
-
+  
 
 def job_detail(request,slug):
   detail=Job.objects.get(slug=slug)

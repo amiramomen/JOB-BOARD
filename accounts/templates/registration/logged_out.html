@@ -1,6 +1,23 @@
-{% extends "base_generic.html" %}
+{% extends "base.html" %}
 
-{% block content %}
-  <p>Logged out!</p>
-  <a href="{% url 'login'%}">Click here to login again.</a>
-{% endblock %}
+
+
+
+
+{% block body %}
+   <div class="bradcam_area bradcam_bg_1">
+        
+           
+                <div class="col-xl-5">
+                    <div class="bradcam_text">
+                        <h3>Logged out!</h3>
+                    </div>
+                </div>
+            
+       
+    </div>
+<div class="order-xl-first col-form-label-sm">
+ 
+    <a class="boxed-btn3" href="{% url 'login'%}">Click here to login again.</a>
+</div>
+{% endblock body %}

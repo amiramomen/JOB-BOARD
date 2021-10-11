@@ -65,22 +65,27 @@
                              <div class="col-xl-auto col-lg-7">
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
-                                        <ul id="navigation">  
-                                            <li><a href="#"><i class="ti-angle-down"></i></a>
+                                        <ul id="navigation"> 
+                                        
+                                          {%if request.user.is_authenticated %}
+                                            <li><a href="#"> Profile<i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                 
-                                                    {%if request.user.is_authenticated %}
+                                                    
                                                     <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
-                                                    {%else %}
-                                                    <li><a href="{% url 'login' %}">Log in</a></li>
-                                                    {%endif%}
-
-                                                    <li><a href="job_details.html">job details </a></li>
-                                                    <li><a href="elements.html">elements</a></li>
+                                                    <li><a href="{% url 'accounts:profile_edit' %}"> Edit Profile </a></li>
                                                     <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
 
                                                 </ul>
                                             </li>
+                                          {%else %}
+                                          
+                                            <li class="phone_num d-none d-xl-block" >
+                                               <a href="{% url 'login' %}">Log in</a>
+                                            </li>
+
+                                          {%endif%}
+
 
                                         </ul>
                                     </nav>

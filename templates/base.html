@@ -3,6 +3,7 @@
 <html class="no-js" lang="zxx">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Job Board</title>
@@ -35,7 +36,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
 
-    <!-- header-start -->
+   <!-- header-start -->
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
@@ -45,7 +46,7 @@
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
                                     <a href="index.html">
-                                        <img src="{% static 'img/logo.png'%}" alt="">
+                                        <img src="{% static 'img/logo.png' %}"alt="">
                                     </a>
                                 </div>
                             </div>
@@ -53,38 +54,58 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="{%url 'home:home' %}">home</a></li>
+                                            <li><a href="{%url 'home:home' %}">Home</a></li>
                                             <li><a href="{% url 'jobs:job_list'%}">Browse Job</a></li>
+                                            <li><a href="{% url 'blogs:blog'%}">Blog</a></li>
                                             <li><a href="{% url 'contact:send_message'%}">Contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+
+                             <div class="col-xl-auto col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation"> 
+                                        
+                                          {%if request.user.is_authenticated %}
+                                            <li><a href="#"> Profile<i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                
+                                                    
+                                                    <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
+                                                    <li><a href="{% url 'accounts:profile_edit' %}"> Edit Profile </a></li>
+                                                    <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+
+                                                </ul>
+                                            </li>
+                                          {%else %}                            
+                                          <div class="col-xl-auto col-lg-3 d-none d-lg-block">
+
+                                            <div class="Appointment">
+                                                <li class="phone_num d-none d-xl-block" >
+                                                <a href="{% url 'login' %}">Log in</a>
+                                                </li>
+                                            </div>
+                                          </div>
+
+
+                                          {%endif%}
+
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                             </div>
+                           
+                            <div class="col-xl-auto col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
-
-                                   {%if request.user.is_authenticated %}
-                                        <div class="phone_num d-none d-xl-block">
-                                            <a href="{% url 'accounts:profile' %}">Profile</a>
-                                        </div>
-
-                                    {%else %}
-                                        <div class="phone_num d-none d-xl-block">
-                                            <a href="{% url 'login' %}">Log in</a>
-                                        </div>
-
-                                    {%endif%}
-
-
                                     <div class="d-none d-lg-block">
                                         <a class="boxed-btn3" href="{% url 'jobs:add_job'%}">Post a Job</a>
                                     </div>
-                                 
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -94,8 +115,12 @@
     </header>
     <!-- header-end -->
 
-    {% block body %}
-    {% endblock %}
+
+{% block body %}
+
+
+
+{% endblock %}
 
     <!-- footer start -->
     <footer class="footer">
@@ -110,9 +135,9 @@
                                 </a>
                             </div>
                             <p>
-                                finloan@support.com <br>
+                                amiramomen999@gmail.com <br>
                                 +10 873 672 6782 <br>
-                                600/D, Green road, NewYork
+                                221B Baker Street,London
                             </p>
                             <div class="socail_links">
                                 <ul>
@@ -141,46 +166,7 @@
 
                         </div>
                     </div>
-                    <div class="col-xl-2 col-md-6 col-lg-2">
-                        <div class="footer_widget wow fadeInUp" data-wow-duration="1.1s" data-wow-delay=".4s">
-                            <h3 class="footer_title">
-                                Company
-                            </h3>
-                            <ul>
-                                <li><a href="#">About </a></li>
-                                <li><a href="#"> Pricing</a></li>
-                                <li><a href="#">Carrier Tips</a></li>
-                                <li><a href="#">FAQ</a></li>
-                            </ul>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".5s">
-                            <h3 class="footer_title">
-                                Category
-                            </h3>
-                            <ul>
-                                <li><a href="#">Design & Art</a></li>
-                                <li><a href="#">Engineering</a></li>
-                                <li><a href="#">Sales & Marketing</a></li>
-                                <li><a href="#">Finance</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 col-lg-4">
-                        <div class="footer_widget wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".6s">
-                            <h3 class="footer_title">
-                                Subscribe
-                            </h3>
-                            <form action="#" class="newsletter_form">
-                                <input type="text" placeholder="Enter your mail">
-                                <button type="submit">Subscribe</button>
-                            </form>
-                            <p class="newsletter_text">Esteem spirit temper too say adieus who direct esteem esteems
-                                luckily.</p>
-                        </div>
-                    </div>
+                  
                 </div>
             </div>
         </div>

@@ -7,8 +7,7 @@ from django.urls import reverse
 
 
 # Create your views here.
-def logout (request):
-    return render(request,'registration/logged_out.html')
+
 
 
 def signup(request):

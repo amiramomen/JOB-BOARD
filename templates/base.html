@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'c/mystyle.css' %} ">
+
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
@@ -56,7 +58,12 @@
                                         <ul id="navigation">
                                             <li><a href="{%url 'home:home' %}">Home</a></li>
                                             <li><a href="{% url 'jobs:job_list'%}">Browse Job</a></li>
-                                            <li><a href="{% url 'blogs:blog'%}">Blog</a></li>
+                                            <li><a href="#"> Blog <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'blogs:blog'%}">Blogs</a></li>
+                                                    <li><a href="{% url 'accounts:profile_edit' %}"> Edit Profile </a></li>
+                                                </ul>
+                                            </li>
                                             <li><a href="{% url 'contact:send_message'%}">Contact</a></li>
                                         </ul>
                                     </nav>
@@ -75,7 +82,7 @@
                                                     
                                                     <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
                                                     <li><a href="{% url 'accounts:profile_edit' %}"> Edit Profile </a></li>
-                                                    <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                                                    <li><a href="{% url 'logout' %}">Logout</a></li>
 
                                                 </ul>
                                             </li>
@@ -112,15 +119,16 @@
                 </div>
             </div>
         </div>
-    </header>
+        <!-- bradcam_area  -->
+  {% block body %}
+
+
+
+ {% endblock %}
+
+</header>
     <!-- header-end -->
 
-
-{% block body %}
-
-
-
-{% endblock %}
 
     <!-- footer start -->
     <footer class="footer">

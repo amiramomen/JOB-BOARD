@@ -20,18 +20,23 @@
     <div class="job_details_area">
         <div class="container">
             <div class="row">
-                
+                  
                 <div class="col-lg-8 mx-auto">
                     <div class="job_sumary">
                         <div class="summery_header">
                             <h3>Job Summery</h3>
+                          
                         </div>
                         <div class="job_content">
-                            <ul>
+                     
+                             <img src="{{profile.image.url}}"alt="" width="180px" height="180px" class="rounded float-right mx-5" > 
+
+                            <ul>  
                                 <li> Name: <span>{{profile}}</span></li>
                                 <li> Email: <span>{{profile.user.email}} </span></li>
-                                <li> Phone : <span>{{profile.phone}}     </span></li>
+                                <li> Phone : <span>{{profile.phone}} </span></li>  
                                 <li>Location: <span> {{profile.city}}</span></li>
+                              
                             </ul>
 
                             <div class="p-5">

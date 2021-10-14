@@ -14,7 +14,8 @@ def get_image_name(instance, filename):
 class Job (models.Model):
     owner = models.ForeignKey(User , on_delete = models.CASCADE)
     title = models.CharField(max_length=100) 
-    job_type = models.CharField(max_length=15,choices= Job_Type)
+    job_type = models.CharField(max_length=15,choices= Job_Type) 
+    location = models.CharField(max_length=20)
     description = models.TextField(max_length=1000)
     published_at = models.DateTimeField(auto_now=True)
     vacancy = models.IntegerField(default=1)
@@ -23,6 +24,7 @@ class Job (models.Model):
     category = models.ForeignKey('Category',on_delete=models.CASCADE)
     image= models.ImageField(upload_to=get_image_name)
     slug = models.SlugField(blank=True,null=True)
+   
 
     def save (self,*args, **kwargs):
         self.slug = slugify(self.title)

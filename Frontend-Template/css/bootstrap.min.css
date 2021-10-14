@@ -521,7 +521,7 @@ mark {
     border: 1px solid #dee2e6;
     border-radius: .25rem;
     max-width: 100%;
-    height: auto
+    height: 200px
 }
 
 .figure {
@@ -2057,7 +2057,7 @@ pre code {
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #495057;
+    color: #0b4279;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -2079,7 +2079,7 @@ pre code {
 }
 
 .form-control::-webkit-input-placeholder {
-    color: #6c757d;
+    color: #e5eaee;
     opacity: 1
 }
 
@@ -9205,8 +9205,8 @@ a.text-dark:hover {
 
 @media print {
     *,
-    ::after,
-    ::before {
+     ::after,
+     ::before {
         text-shadow: none!important;
         box-shadow: none!important
     }

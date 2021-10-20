@@ -1,10 +1,11 @@
 from django.shortcuts import redirect,render
-from .models import Blog
+from .models import Blog , Comment
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
-from .form import AddCommentForm
+from .forms import AddCommentForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.http import  HttpResponseRedirect
 
 
 # Create your views here.
@@ -26,6 +27,9 @@ def blog (request):
 
 def blog_details (request ,id):
     detail=Blog.objects.get(id=id)
+    comments = Comment.objects.all()
+    comm = comments.count()
+
     try:
       prev = get_object_or_404(Blog, pk=(detail.id)-1)
     except:
@@ -36,20 +40,21 @@ def blog_details (request ,id):
     except: 
       next = None
 
-    return render(request, 'blog/blog_detail.html',{'detail':detail,'prev':prev,'next':next})
+
+    if request.method == 'POST':
+      
+      form = AddCommentForm(request.POST , request.FILES)
+      if form.is_valid():
+          myform=form.save(commit=False)
+          myform.user=request.user
+          myform.blog=detail
+          myform.save()
+          return HttpResponseRedirect('#')
+    else:
+      form=AddCommentForm()
 
 
-@login_required
-def add_comment(request):
-  if request.method == 'POST':
-    form = AddCommentForm(request.POST )
-    if form.is_valid():
-        myform=form.save(commit=False)
-        myform.name=request.user
-        myform.save()
-        return redirect(reverse('blog/blog_detail.html'))
 
-  else:
-    form=AddCommentForm()
-    context= {'formm':form}
-    return render(request,'blog/blog_detail.html',context)
+    return render(request, 'blog/blog_detail.html',{'detail':detail,'prev':prev,'next':next,'form':form , 'comm':comm,'comments':comments})
+
+

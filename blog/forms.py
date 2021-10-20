@@ -5,4 +5,6 @@ class AddCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment',)
-        exclude = ('name',)
+
+      
+

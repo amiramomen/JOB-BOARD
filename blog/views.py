@@ -2,7 +2,7 @@ from django.shortcuts import redirect,render
 from .models import Blog , Comment
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
-from .forms import AddCommentForm
+from .forms import AddCommentForm , AddBlogForm 
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import  HttpResponseRedirect
@@ -18,16 +18,16 @@ def blog (request):
     paginator = Paginator(blogs, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    njob = Blog.objects.all().count() 
    
 
-    return render(request, 'blog/blog.html',{'blogs':blogs,'jobs': page_obj,'Njob':njob})
+    return render(request, 'blog/blog.html',{'blogs':blogs,'pages': page_obj})
 
 
 
 def blog_details (request ,id):
     detail=Blog.objects.get(id=id)
-    comments = Comment.objects.all()
+    blogs=Blog.objects.all()
+    comments = Comment.objects.filter(blog=detail)
     comm = comments.count()
 
     try:
@@ -55,6 +55,20 @@ def blog_details (request ,id):
 
 
 
-    return render(request, 'blog/blog_detail.html',{'detail':detail,'prev':prev,'next':next,'form':form , 'comm':comm,'comments':comments})
+    return render(request, 'blog/blog_detail.html',{'blogs':blogs,'detail':detail,'prev':prev,'next':next,'form':form , 'comm':comm,'comments':comments})
 
 
+@login_required
+def add_blog (request):
+
+    if request.method == 'POST':
+      form = AddBlogForm(request.POST , request.FILES)
+      if form.is_valid():
+         myform=form.save(commit=False)
+         myform.bloger=request.user
+         myform.save()
+         return redirect (reverse('blogs:blog'))
+
+    else:
+      form=AddBlogForm()
+    return render(request,'blog/post_blog.html',{'form':form})

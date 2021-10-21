@@ -4753,7 +4753,7 @@ tbody.collapse.show {
 }
 
 .card-img {
-    width: 100%;
+    width: 150%;
     border-radius: calc(.25rem - 1px)
 }
 
@@ -9205,8 +9205,8 @@ a.text-dark:hover {
 
 @media print {
     *,
-    ::after,
-    ::before {
+     ::after,
+     ::before {
         text-shadow: none!important;
         box-shadow: none!important
     }

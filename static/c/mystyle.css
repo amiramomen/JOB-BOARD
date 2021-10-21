@@ -19,3 +19,7 @@ label {
     border-radius: 50%;
     margin-right: 30px;
 }
+
+.card-img {
+    border-radius: calc(.25rem - 1px)
+}

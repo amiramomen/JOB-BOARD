@@ -1,6 +1,8 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from accounts.models import Profile
+from django.contrib.auth.models import User
+
 # Create your models here.
 Blog_Type = (
 ('travel','travel'),
@@ -19,7 +21,7 @@ class Blog(models.Model):
     image = models.ImageField(upload_to='blogs/')
     blog_type = models.CharField (max_length=15 , choices = Blog_Type)
     blog_description = models.TextField (max_length=200)
-    bloger = models.ForeignKey(Profile,on_delete=models.CASCADE ,default=None)
+    bloger = models.ForeignKey(User,on_delete=models.CASCADE ,default=None)
     published_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(blank=True,null=True)
 
@@ -34,7 +36,7 @@ class Blog(models.Model):
 
 
 class Comment(models.Model):
-    user=models.ForeignKey(Profile, verbose_name=("user"), on_delete=models.CASCADE)
+    user=models.ForeignKey(User, verbose_name=("user"), on_delete=models.CASCADE)
     blog= models.ForeignKey(Blog,verbose_name=("blog"),on_delete=models.CASCADE )
     comment= models.TextField(max_length=255)
     published_at=models.DateTimeField(auto_now=True)
